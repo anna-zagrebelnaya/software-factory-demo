@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My list</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 480px; margin: 2rem auto; padding: 0 1rem; }
+  form { display: flex; gap: .5rem; }
+  input { flex: 1; padding: .6rem; font-size: 1rem; }
+  button { padding: .6rem .9rem; font-size: 1rem; cursor: pointer; }
+  ul { list-style: none; padding: 0; }
+  li { display: flex; justify-content: space-between; align-items: center; padding: .6rem 0; border-bottom: 1px solid #ddd; }
+</style>
+</head>
+<body>
+<h1>My list</h1>
+<form id="form">
+  <input id="text" placeholder="Add an item" aria-label="New item" autocomplete="off">
+  <button type="submit">Add</button>
+</form>
+<ul id="list"></ul>
+<script type="module">
+import { addItem, removeItem } from './list.js';
+const KEY = 'items';
+let items = JSON.parse(localStorage.getItem(KEY) || '[]');
+const list = document.getElementById('list');
+const save = () => localStorage.setItem(KEY, JSON.stringify(items));
+function render() {
+  list.replaceChildren(...items.map((i) => {
+    const li = document.createElement('li');
+    const span = document.createElement('span');
+    span.textContent = i.text;
+    const del = document.createElement('button');
+    del.textContent = 'Delete';
+    del.setAttribute('aria-label', `Delete ${i.text}`);
+    del.onclick = () => { items = removeItem(items, i.id); save(); render(); };
+    li.append(span, del);
+    return li;
+  }));
+}
+document.getElementById('form').onsubmit = (e) => {
+  e.preventDefault();
+  const input = document.getElementById('text');
+  items = addItem(items, input.value);
+  input.value = '';
+  save(); render();
+};
+render();
+</script>
+</body>
+</html>
