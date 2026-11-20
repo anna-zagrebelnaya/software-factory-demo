@@ -20,16 +20,16 @@
   <input id="text" placeholder="Add an item" aria-label="New item" autocomplete="off">
   <button type="submit">Add</button>
 </form>
-<p id="empty" class="empty">Nothing here yet — add your first item.</p>
+<p id="empty" class="empty" hidden>Nothing here yet — add your first item.</p>
 <ul id="list"></ul>
 <script type="module">
-import { addItem, removeItem } from './list.js';
+import { addItem, removeItem, isEmpty } from './list.js';
 const KEY = 'items';
 let items = JSON.parse(localStorage.getItem(KEY) || '[]');
 const list = document.getElementById('list');
 const save = () => localStorage.setItem(KEY, JSON.stringify(items));
 function render() {
-  document.getElementById('empty').hidden = items.length > 0;
+  document.getElementById('empty').hidden = !isEmpty(items);
   list.replaceChildren(...items.map((i) => {
     const li = document.createElement('li');
     const span = document.createElement('span');
