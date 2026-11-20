@@ -6,11 +6,12 @@ A one-page list app. People add items and delete them; the list is saved in the 
 Top jobs: 1) add an item, 2) delete an item, 3) come back later and still see the list.
 
 ## Setup & commands
-- Install: nothing to install (no dependencies; Node 20+).
+- Install: `npm ci` (one dev dependency: playwright, for the browser test; Node 20+).
 - Run the app: `npm run dev`
 - Open it: http://localhost:3000 (set `PORT` to change)
 - Unit tests: `npm test`
 - Smoke test (CLI): `npm run smoke` (starts the app on a free port and checks it responds)
+- Browser test: `npm run e2e` (Playwright; first time on a machine run `npx playwright install chromium`)
 - Lint / types: `npm run lint` (syntax check of every JS file; no types in this repo)
 - Everything CI runs: `npm run ci`
 - Needed services and how to start them: none
