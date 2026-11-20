@@ -8,6 +8,10 @@
     "test": "node --test test/*.test.js",
     "lint": "node scripts/lint.js",
     "smoke": "node scripts/smoke.js",
-    "ci": "npm run lint && npm test && npm run smoke"
+    "ci": "npm run lint && npm test && npm run smoke && npm run e2e",
+    "e2e": "node test/e2e.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.52.0"
   }
 }
