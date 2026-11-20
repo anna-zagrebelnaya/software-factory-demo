@@ -1,0 +1,13 @@
+{
+  "name": "software-factory-demo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "test": "node --test test/*.test.js",
+    "lint": "node scripts/lint.js",
+    "smoke": "node scripts/smoke.js",
+    "ci": "npm run lint && npm test && npm run smoke"
+  }
+}
