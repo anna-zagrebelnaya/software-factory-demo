@@ -7,3 +7,7 @@ export function addItem(items, text) {
 export function removeItem(items, id) {
   return items.filter((i) => i.id !== id);
 }
+
+export function isEmpty(items) {
+  return items.length === 0;
+}

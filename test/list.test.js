@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { addItem, removeItem } from '../public/list.js';
+import { addItem, removeItem, isEmpty } from '../public/list.js';
 
 test('addItem adds trimmed text', () => {
   const r = addItem([], '  milk ');
@@ -13,4 +13,8 @@ test('addItem ignores blank text', () => {
 test('removeItem deletes by id', () => {
   const r = removeItem([{ id: 1, text: 'a' }, { id: 2, text: 'b' }], 1);
   assert.deepEqual(r, [{ id: 2, text: 'b' }]);
+});
+test('isEmpty is true only for an empty list', () => {
+  assert.equal(isEmpty([]), true);
+  assert.equal(isEmpty([{ id: 1, text: 'a' }]), false);
 });
